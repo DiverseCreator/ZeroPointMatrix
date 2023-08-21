@@ -9,7 +9,7 @@
 <body>
     <div id="comments"></div>
 <script>
-  fetch('https://api.github.com/gists/6841056cc1476898a3a7173b4ee7daa2')
+  fetch('https://api.github.com/gists/32bec06080ecac1ca3e9b9db9d914633')
     .then(response => response.json())
     .then(data => {
       const comments = JSON.parse(data.files["comments.json"].content).comments;
