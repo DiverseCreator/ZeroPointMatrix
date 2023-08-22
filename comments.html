@@ -4,54 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://connect.facebook.net/en_US/sdk.js ">
-    <title>Grid Example</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-        #grid {
-            display: grid;
-            grid-template-columns: auto auto;
-            grid-gap: 10px;
-            padding: 20px;
-        }
-        .heading {
-            font-weight: bold;
-        }
-        .row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid #ccc;
-            padding: 10px;
-        }
-    </style>
+    <title>Document</title>
 </head>
 <body>
-    <div id="grid">
-        <div class="heading">Name</div>
-        <div class="heading">Comment</div>
-        <div id="comments"></div>
-    </div>
-    <script>
-      fetch('https://api.github.com/gists/32bec06080ecac1ca3e9b9db9d914633')
-        .then(response => response.json())
-        .then(data => {
-          const comments = JSON.parse(data.files["comments.json"].content).comments;
-          const commentsDiv = document.getElementById('comments');
-          comments.forEach(comment => {
-            const rowDiv = document.createElement('div');
-            rowDiv.classList.add('row');
-            const nameDiv = document.createElement('div');
-            nameDiv.textContent = comment.name;
-            const commentDiv = document.createElement('div');
-            commentDiv.textContent = comment.comment;
-            rowDiv.appendChild(nameDiv);
-            rowDiv.appendChild(commentDiv);
-            commentsDiv.appendChild(rowDiv);
-          });
-        });
-    </script>
+    <div id="comments"></div>
+<script>
+  fetch('https://api.github.com/gists/32bec06080ecac1ca3e9b9db9d914633')
+    .then(response => response.json())
+    .then(data => {
+      const comments = JSON.parse(data.files["comments.json"].content).comments;
+      const commentsDiv = document.getElementById('comments');
+      comments.forEach(comment => {
+        const commentDiv = document.createElement('div');
+        commentDiv.textContent = `${comment.name}: ${comment.comment}`;
+        commentsDiv.appendChild(commentDiv);
+      });
+    });
+</script>
+
 </body>
 </html>
